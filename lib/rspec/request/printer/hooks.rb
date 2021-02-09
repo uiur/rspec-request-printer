@@ -1,3 +1,4 @@
+require 'rouge'
 RSpec.configure do |config|
   config.after(:each) do |example|
     if example.metadata[:type] == :request && request && response && ENV['RSPEC_REQUEST_PRINTER']
@@ -12,10 +13,11 @@ RSpec.configure do |config|
         end
       end.to_h
 
-      puts JSON.pretty_generate(raw_params)
+      Rspec::Request::Printer.pretty_print(raw_params)
+
       puts
       if response.body.present?
-        puts JSON.pretty_generate(response.parsed_body)
+        Rspec::Request::Printer.pretty_print(response.parsed_body)
       end
     end
   end

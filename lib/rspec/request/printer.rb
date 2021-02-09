@@ -11,6 +11,15 @@ module Rspec
       ensure
         request.set_header('action_dispatch.request.request_parameters', original)
       end
+
+      def self.pretty_print(hash)
+        source = JSON.pretty_generate(hash)
+
+        lexer = Rouge::Lexers::JSON.new
+        theme = Rouge::Themes::Base16::Solarized.new
+        formatter = Rouge::Formatters::Terminal256.new(theme)
+        puts formatter.format(lexer.lex(source))
+      end
     end
   end
 end
