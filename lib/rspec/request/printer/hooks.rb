@@ -5,13 +5,11 @@ RSpec.configure do |config|
       puts "\n#{request.request_method} #{request.original_url}"
 
       raw_params = Rspec::Request::Printer.raw_request_params(request)
-      raw_params = raw_params.map do |key, value|
+      raw_params.each do |key, value|
         if value.is_a?(String) && value.size > 200
-          [key, value[0..200] + '…']
-        else
-          [key, value]
+          raw_params[key] = value[0..200] + '…'
         end
-      end.to_h
+      end
 
       Rspec::Request::Printer.pretty_print(raw_params)
 

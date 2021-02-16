@@ -7,7 +7,7 @@ module Rspec
     module Printer
       def self.raw_request_params(request)
         original = request.delete_header('action_dispatch.request.request_parameters')
-        request.request_parameters
+        request.request_parameters.to_hash
       ensure
         request.set_header('action_dispatch.request.request_parameters', original)
       end
