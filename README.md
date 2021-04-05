@@ -1,8 +1,28 @@
-# Rspec::Request::Printer
+# rspec-request-printer
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/rspec/request/printer`. To experiment with that code, run `bin/console` for an interactive prompt.
+rspec-request-printer prints json api response as pretty format when running request specs.
 
-TODO: Delete this and the text above, and describe your gem
+It's helpful for cases like:
+
+- check the response body with your eyes when you write json api
+- copy an example of api response and show it to others in a pull request
+
+## Usage
+
+Run rspec with `RSPEC_REQUEST_PRINTER=1`.
+
+```ruby
+$ RSPEC_REQUEST_PRINTER=1 bundle exec rspec spec/requests/menus_spec.rb
+GET http://example.com/menus/72e1c777-547e-450d-ad83-0bf70e5786ca
+{}
+
+{
+  "id": "72e1c777-547e-450d-ad83-0bf70e5786ca",
+  "name": "foobar",
+  "status": "published",
+  "created_at": "2021-04-05T18:30:49+09:00"
+}
+```
 
 ## Installation
 
@@ -19,21 +39,6 @@ And then execute:
 Or install it yourself as:
 
     $ gem install rspec-request-printer
-
-## Usage
-
-TODO: Write usage instructions here
-
-## Development
-
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/rspec-request-printer.
-
 
 ## License
 
